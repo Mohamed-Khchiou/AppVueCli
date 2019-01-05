@@ -51,6 +51,35 @@
                 v-model="pagesize"
             > : {{this.pagesize}}
         </p>
+
+        <!-- modal for restaurant details-->
+        <div id="modal">
+        <!-- use the modal component, pass in the prop -->
+        <app-restau-detail v-if="showModal" @close="showModal = false">
+
+            <template slot="body">
+                <p><b>Nom :</b> {{detailResto.name}}</p>            
+                <p><b>Cuisine :</b> {{detailResto.cuisine}}</p>
+
+                </br>
+                <h3>Adresse :</h3>
+                <!-- Verification de l'existance de l'adresse-->
+                <div v-if="detailResto.address !== undefined">
+                    <p>{{detailResto.address.building}}</p>
+                    <p>{{detailResto.address.street}}</p>
+                    <p>{{detailResto.address.zipcode}}</p>
+                </div>
+                <div v-else>
+                    <p>Inconnue</p>
+                </div>
+                
+                <img width="100%" src="../assets/restoImg.jpg">
+            </template>
+
+            <h3 slot="header">Details du restaurant</h3>
+        </app-restau-detail>
+        </div>
+
         <table>
             <tr>
                 <th>Nom</th>
@@ -60,7 +89,7 @@
             <tbody>
                 <tr v-for="r,index in restaurants" 
                     v-bind:style="{backgroundColor:getColor(index)}">
-                    <td>{{r.name}}</td>
+                    <td v-on:click="detailsRestaurant(index)">{{r.name}}</td>
                     <td> {{r.cuisine}}</td>
                     <td><button v-on:click="supprimerRestaurant(index)">Delete</button></td>
                     <td><button v-on:click="formModifierRestaurant(index)">Modifier</button></td>
@@ -86,6 +115,9 @@
 
 <script>
 
+
+import Modal from './Modal.vue'; // LOCAL COMPONENT
+
 export default {
 	data() {
         return {
@@ -97,15 +129,28 @@ export default {
                 cuisine: 'En grande quantité'
             }
             ],
+            showModal: false,
             nbRestaurants: 0,
             nbPagesDeResultats: 0,
             nom: '',
             cuisine: '',
             page: 0,
             pagesize: 10,
-            nomRecherche: ""        
+            nomRecherche: "",
+            detailResto:{
+                name: '',
+                cuisine: '',
+                address:{
+                    building:'',
+                    street:'',
+                    zipcode:''
+                }
+            }
         }
         
+	},
+	components: { 				// LOCAL COMPONENTS
+		'app-restau-detail': Modal 
 	},
     mounted() {
         console.log("AVANT AFFICHAGE");
@@ -155,6 +200,18 @@ export default {
                 .catch(function (err) {
                     console.log(err);
                 });
+
+        },
+        detailsRestaurant(index) {
+            var id = this.restaurants[index]._id;
+            console.log("on affiche les details du restaurant id=" + id);
+            
+            var resto = this.restaurants[index];
+            
+            this.detailResto = resto;
+
+            this.showModal = true;
+
 
         },
         formModifierRestaurant(index) {

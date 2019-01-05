@@ -5,6 +5,7 @@ import User from './components/User.vue';
 import Blog from './components/Blog.vue';
 import Compte from './components/Compte.vue';
 import Restaurant from './components/Restaurant.vue';
+import Modal from './components/Modal.vue';
 
 // Définition des routes
 Vue.use(VueRouter);
@@ -13,6 +14,7 @@ const routes = [
 	{path:'/blog', component: Blog},
 	{path:'/compte', component: Compte},
 	{path:'/restaurant', component: Restaurant},
+	{path:'/modal', component: Modal},
 	{path:'/', component: User},
 ]
 
@@ -24,6 +26,10 @@ const router = new VueRouter({
 // partout, dans tous les fichiers .vue
 // C'est un GLOBAL COMPONENT
 Vue.component("app-user", User);
+
+// register modal componentm
+Vue.component('app-restau-detail', Modal);
+  
 
 new Vue({
   el: '#app',
