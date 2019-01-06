@@ -57,9 +57,11 @@
         <!-- use the modal component, pass in the prop -->
         <app-restau-detail v-if="showModal" @close="showModal = false">
 
+            <h3 slot="header">Details du restaurant</h3>
             <template slot="body">
                 <p><b>Nom :</b> {{detailResto.name}}</p>            
                 <p><b>Cuisine :</b> {{detailResto.cuisine}}</p>
+                <router-link to="/carte">Voir la carte</router-link>
 
                 </br>
                 <h3>Adresse :</h3>
@@ -76,7 +78,6 @@
                 <img width="100%" src="../assets/restoImg.jpg">
             </template>
 
-            <h3 slot="header">Details du restaurant</h3>
         </app-restau-detail>
         </div>
 

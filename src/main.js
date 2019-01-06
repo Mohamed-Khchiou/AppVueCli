@@ -6,6 +6,8 @@ import Blog from './components/Blog.vue';
 import Compte from './components/Compte.vue';
 import Restaurant from './components/Restaurant.vue';
 import Modal from './components/Modal.vue';
+import Carte from './components/Carte.vue';
+import Commande from './components/Commande.vue';
 
 // Définition des routes
 Vue.use(VueRouter);
@@ -15,6 +17,8 @@ const routes = [
 	{path:'/compte', component: Compte},
 	{path:'/restaurant', component: Restaurant},
 	{path:'/modal', component: Modal},
+	{path:'/carte', component: Carte},
+	{path:'/commande', component: Commande},
 	{path:'/', component: User},
 ]
 
