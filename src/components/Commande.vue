@@ -21,7 +21,9 @@
 #commande {
     width: 15%;
     position: fixed;
+    height : 50%;
     right: 0;
+    overflow-y: scroll;
 }
 
 .total{
