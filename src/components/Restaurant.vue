@@ -90,9 +90,9 @@
             <tbody>
                 <tr v-for="r,index in restaurants" 
                     v-bind:style="{backgroundColor:getColor(index)}">
-                    <td v-on:click="detailsRestaurant(index)">{{r.name}}</td>
+                    <td v-on:click="detailsRestaurant(index)" class="foodName">{{r.name}}</td>
                     <td> {{r.cuisine}}</td>
-                    <td><button v-on:click="supprimerRestaurant(index)">Delete</button></td>
+                    <td><button v-on:click="supprimerRestaurant(index)">Supprimer</button></td>
                     <td><button v-on:click="formModifierRestaurant(index)">Modifier</button></td>
                 </tr>
             </tbody>
@@ -322,50 +322,84 @@ export default {
 
 
 <style>
-table {
-    border: 1px solid black;
-    width: 100%;
-    border-collapse: collapse;
-}
+    body {
+        font-family: Helvetica Neue, Arial, sans-serif;
+        font-size: 14px;
+        color: #444;
+    }
 
-th{    
-    width: 30%;
-}
+    table {        
+		width: 40%;
+        margin: 0 auto;
+        border: 2px solid #42b983;
+        border-radius: 3px;
+        background-color: #fff;
+        margin-bottom:15px;
+    }
 
-tr,
-td {
-    border: 1px solid black;
-}
+    th {
+        background-color: #42b983;
+        color: rgba(255,255,255,0.66);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-td {
-    padding: 5px;
-}
+    td {
+        background-color: #f9f9f9;
+    }
 
-tr:hover {
-    background-color: yellow;
-}
+    th, td {
+        min-width: 120px;
+        padding: 10px 20px;
+    }
 
-input:invalid {
-    background-color: pink;
-}
+    th.active {
+        color: #fff;
+    }
 
-input:valid {
-    background-color: lightGreen;
-}
+    th.active .arrow {
+        opacity: 1;
+    }
 
-.bordureRouge {
-    border: 2px dashed red;
-}
+    .arrow {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+        margin-left: 5px;
+        opacity: 0.66;
+    }
 
-.inactif {
-    disabled:true;
-    color:lightGrey;
-}
-.center-div
-{
-  margin: 0 auto;
-  width: 600px;
-  height: auto;
-  text-align: center;
-}
+    .arrow.asc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 4px solid #fff;
+    }
+
+    .arrow.dsc {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid #fff;
+    }
+
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 7px 16px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .foodName{        
+        cursor: pointer;
+    }
+	h3{
+        color: #4CAF50;
+	}
 </style>
